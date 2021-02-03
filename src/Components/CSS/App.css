@@ -1,0 +1,9 @@
+body, html {
+    margin: 0 0;
+    background-color: #eee2dc;
+    font-family: 'Lato', sans-serif;
+    color: white;
+    text-shadow: #000 0px 0px 2px;
+    overflow: auto;
+    
+}

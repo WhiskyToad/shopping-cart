@@ -1,0 +1,53 @@
+#top-ad {
+    width: 100%;
+    text-align: center;
+    color: white;
+    text-shadow: #000 0px 0px 3px;
+}
+
+#top-ad img {
+    width: 100%;
+}
+
+#top-ad h1 {
+    position: absolute;
+    top: 23%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+    font-family: 'Playfair Display', serif;
+}
+
+#top-ad h2 {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 40px;
+}
+
+#button-container-ad {
+    width: 600px;
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-between;
+}
+#top-ad button {
+    width: 200px;
+    height: 50px;
+    background-color:#a6607c;
+    font-size: 20px;
+    color: white;
+    text-shadow: #000 0px 0px 2px;
+    font-weight: 500;
+    cursor: pointer;
+    border:none;
+    font-family: 'Lato', sans-serif;
+}
+
+#top-ad button:hover{
+    background-color: #542f34;
+}
