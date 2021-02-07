@@ -14,8 +14,8 @@ const Home = () => {
         <h1>Lartsy</h1>
         <h2>Because they want to look good too.</h2>
         <div id = 'button-container-ad'>
-          <button>Cat Collection</button>
-          <button>Dog Collection</button>
+          <a href ='/shop#cat'><button>Cat Collection</button></a>
+          <a href ='/shop#dog'><button>Dog Collection</button></a>
         </div>
       </div>
      <Footer /> 

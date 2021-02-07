@@ -1,5 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
-import React, { useState } from "react";
+import React from "react";
+import {useSelector, useDispatch} from 'react-redux'
+import {addToBasket, changeMainFilters} from '../Actions'
+import {initialState} from '../Reducers/basket'
 import Header from './Header';
 import Footer from './Footer';
 import './CSS/Shop.css';
@@ -18,42 +21,44 @@ import Data from './Data'
 */
 
 const Shop = (props) => {
-    const [mainFilters, setMainFilters] = useState('all')
-    const [subFilter, setSubFilter] = useState('all');
-    const [basket, setBasket] = useState([]);
+  const mainFilter = useSelector(state => state.mainFilter);
+  const subFilter = useSelector(state => state.subFilter);
+  const dispatch = useDispatch();
 
-    let Catalogue = Data.map((item => {
+    let Catalogue = Data.map((item, id) => {
       let display ='display-card'
-      if (mainFilters !== 'all'){
-        if (mainFilters !== item.category){
+      let pageLink = '/item#' + id;
+      console.log(pageLink)
+      if (mainFilter !== 'all'){
+        if (mainFilter !== item.category){
           display = 'hidden';
         }}
-        if (subFilter !== 'all'){
+        if (subFilter !== 'allSub'){
           if (subFilter !== item.subCategory){
             display = 'hidden';
           }}
-      return <div className = {display} key = {item.id}>
-      <img src = {item.src} alt = {item.name}></img>
+      return  <div className = {display} key = {id}>
+      <a href ={pageLink}><img src = {item.src} alt = {item.name}></img></a>
       <div className = 'name-row'>
         <h2>{item.name}</h2>
         <h2 className = 'price'>£{item.price}</h2>
       </div>
-      <button onClick = {() => addToBasket(item.id)}>Buy Now</button>
+      <button onClick = {() => changeBasket(item)}>Buy Now</button>
     </div>
-    }));
+    });
 
-    function changeMainFilter(choice){
-      setMainFilters(choice);
+    function changeBasket(choice){
+      dispatch(addToBasket(choice))
+    }
+    function changeFilter(choice){
+      console.log(initialState)
+      dispatch(changeMainFilters(choice))
       return Catalogue;
     }
-    //change to an array to allow for mutiple choices? need some kind of checking
-    function changeSubFilter(choice){
-      setSubFilter(choice);
-      return Catalogue;
-    }
 
-    function addToBasket(id){
-      setBasket(oldArray => [...oldArray, Data[id]]);
+    if (window.location.hash){
+      changeFilter(window.location.hash.substr(1))
+      window.history.replaceState(null, null, ' ');
     }
 
   return (
@@ -63,46 +68,46 @@ const Shop = (props) => {
         <div id = 'shop-sidebar'>
         <div className = 'filters-container'>
             <h1>Category:</h1>
-              <div className = 'filter-line' onClick = { () => changeMainFilter('all')}>
+              <div className = 'filter-line' onClick = { () => changeFilter('all')}>
               <div className = 'filter-img'>
-                <img src = {Checked} className = {mainFilters === 'all' ? null : 'hidden'}></img>
+                <img src = {Checked} className = {mainFilter === 'all' ? null : 'hidden'}></img>
                 </div>
                 <h3>All</h3>
               </div>
-              <div className = 'filter-line' onClick = {() => changeMainFilter('cat')}>
+              <div className = 'filter-line' onClick = {() => changeFilter('cat')}>
               <div className = 'filter-img'>
-                <img src = {Cat} className = {mainFilters === 'cat' ? null : 'hidden'}></img>
+                <img src = {Cat} className = {mainFilter === 'cat' ? null : 'hidden'}></img>
                 </div>
                 <h3>Cat</h3>
               </div>
-              <div className = 'filter-line' onClick = {() => changeMainFilter('dog')}>
+              <div className = 'filter-line' onClick = {() => changeFilter('dog')}>
               <div className = 'filter-img'>
-                <img src = {Dog} className = {mainFilters === 'dog' ? null : 'hidden'}></img>
+                <img src = {Dog} className = {mainFilter === 'dog' ? null : 'hidden'}></img>
                 </div>
                 <h3>Dog</h3>
               </div>
             </div>
             <div className = 'filters-container'>
             <h1>Sub-Category:</h1>
-            <div className = 'filter-line' onClick = { () => changeSubFilter('all')}>
+            <div className = 'filter-line' onClick = { () => changeFilter('allSub')}>
               <div className = 'filter-img'>
-                <img src = {Checked} className = {subFilter === 'all' ? null : 'hidden'}></img>
+                <img src = {Checked} className = {subFilter === 'allSub' ? null : 'hidden'}></img>
                 </div>
                 <h3>All</h3>
               </div>
-              <div className = 'filter-line' onClick = { () => changeSubFilter('hat')}>
+              <div className = 'filter-line' onClick = { () => changeFilter('hat')}>
               <div className = 'filter-img'>
                 <img src = {Hat} className = {subFilter === 'hat' ? null : 'hidden'}></img>
                 </div>
                 <h3>Hats</h3>
               </div>
-              <div className = 'filter-line' onClick = { () => changeSubFilter('top')}>
+              <div className = 'filter-line' onClick = { () => changeFilter('top')}>
               <div className = 'filter-img'>
                 <img src = {Top} className = {subFilter === 'top' ? null : 'hidden'}></img>
                 </div>
                 <h3>Tops</h3>
               </div>
-              <div className = 'filter-line' onClick = { () => changeSubFilter('glasses')}>
+              <div className = 'filter-line' onClick = { () => changeFilter('glasses')}>
               <div className = 'filter-img'>
                 <img src = {Glasses} className = {subFilter === 'glasses' ? null : 'hidden'}></img>
                 </div>

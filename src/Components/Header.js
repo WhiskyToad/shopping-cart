@@ -1,30 +1,40 @@
-import React, { useState } from "react";
+import React from "react";
+import {useSelector} from 'react-redux'
+import BasketPopup from './BasketDisplay'
+import MemeGenerator from './RandomMeme'
 import './CSS/Header.css';
 import logo from '../Images/Lartsy-01.png';
 import Account from '../Images/account-icon.png';
-import Basket from '../Images/basket.png';
-import Search from '../Images/search.png';
 
 
-const Header = () => {
-  const [displayBasket , setDisplayBasket] = useState(false)
-    return (
+//need to sort out keys for removing
+
+const Header = (props) => {
+  const basketItems = useSelector(state => state.basket.arr);
+  
+      return (
+      <div>
       <ul id = 'navbar'>
           <div className = 'navbar-segment-left'>
           <a href = '../'><img id = 'logo' src = {logo} alt = 'Lartsy logo'></img></a>
-          <a href = './shop'><li>Cats</li></a>
-            <a href = './shop'><li>Dogs</li></a>
-            <a href = './shop'><li>Shop</li></a>
+          <a href = './shop#cat'><li>Cats</li></a>
+            <a href = './shop#dog'><li>Dogs</li></a>
+            <a href = './shop#all'><li>Shop</li></a>
         </div>
         <div className = 'navbar-segment-right'>
-            <input type = 'text' id = "search" placeholder = 'Search'></input>
-            <img src = {Search} alt = 'search'></img>
+            <MemeGenerator />
             <img src = {Account} alt = 'account'></img>
-            <img src = {Basket} alt = 'basket' onClick = {() => setDisplayBasket(!displayBasket)}></img>
-            <div id = 'basket-container' className = {displayBasket ? null : 'hidden'}></div>
+            <div>
+            <span id = 'basket-size'>
+              <BasketPopup />
+              ({basketItems.length})</span>
+            </div>
         </div>
       </ul>
+      </div>
     );
   };
+
+  
   
   export default Header;
