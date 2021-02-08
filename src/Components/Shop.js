@@ -17,6 +17,7 @@ import Data from './Data'
 const Shop = (props) => {
   const mainFilter = useSelector(state => state.mainFilter);
   const subFilter = useSelector(state => state.subFilter);
+  const dispatch = useDispatch();
 
     let Catalogue = Data.map((item, id) => {
       let display ='display-card'
