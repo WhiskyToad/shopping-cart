@@ -5,7 +5,7 @@ const memeDisplay = (state = false, action) => {
         case 'HIDE-MEME' :
             return false;
         default:
-            return state;
+            return false;
     }
 }
 
