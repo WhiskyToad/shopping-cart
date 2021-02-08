@@ -1,12 +1,15 @@
 import React, {useState} from "react";
 import Search from '../Images/search.png';
+import {useSelector, useDispatch} from 'react-redux'
+import {memeDisplay} from '../Actions';
 
 
 
 
   const MemeGenerator = () => {
+    const dispatch = useDispatch();
+    const memeValue = useSelector(state => state.memeDisplay);
     const [meme, setMeme] = useState({
-        display: false,
         item: '',
         src: 'null'
       })
@@ -22,28 +25,28 @@ import Search from '../Images/search.png';
             })
             .then(function(response) {
             setMeme({
-                display: true,
                 item: item,
                 src: response.data.images.original.url
             })
+            })
+            .then(function(){
+              dispatch(memeDisplay('DISPLAY-MEME'))
             });
         }
     }
+      
+    
   return (
       <div>
     <input type = 'text' id = "search" placeholder = 'Random Meme!' onKeyDown={getMeme}></input>
     <img src = {Search} alt = 'search' onClick ={() => getMeme('Enter')}></img>
-    <div id = 'meme-container' className = {meme.display ? null : 'hidden'}>
+    <div id = 'meme-container' className = {memeValue ? null : 'hidden'}>
     <img src = {meme.src} alt = 'random meme'></img>
     <p>I said random!</p>
     <p>Here's a {meme.item} meme!</p>
     <span>
       <button onClick = {() => getMeme('Enter')}>Another!</button>
-      <button onClick = {() => setMeme({
-        display: false,
-        item: meme.item,
-        src: meme.src
-      })}>Close</button>
+      <button onClick = {() => dispatch(memeDisplay('HIDE-MEME'))}>Close</button>
     </span>
   </div>
   </div>

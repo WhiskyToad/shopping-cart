@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import Popup from 'reactjs-popup';
 import {useSelector, useDispatch} from 'react-redux'
 import Basket from '../Images/basket.png'
-import {removeBasket} from '../Actions';
+import {removeBasket, memeDisplay} from '../Actions';
 
 
 const BasketPopup = () => {
   const dispatch = useDispatch();
+  const memeValue = useSelector(state => state.memeDisplay);
   const basketItems = useSelector(state => state.basket.arr);
   let total = 0
     const [open, setOpen] = useState(false);
@@ -32,9 +33,17 @@ const BasketPopup = () => {
           </div>
           </div>
     });
+
+    function openBasket(){
+      if (memeValue){
+        dispatch(memeDisplay('HIDE-MEME'))
+      }
+      setOpen(o => !o);
+    }
+
     return (
     <div>
-      <img src = {Basket} alt = 'basket'onClick={() => setOpen(o => !o)}></img>
+      <img src = {Basket} alt = 'basket'onClick={() => openBasket()}></img>
       <Popup open={open} closeOnDocumentClick onClose={closeModal}>
       <div id = 'basket-container'>
               {basketCreator}

@@ -17,3 +17,9 @@ export const removeBasket = (choice) =>{
         payload: choice
     }
 }
+
+export const memeDisplay = (choice) => {
+    return {
+        type: choice
+    }
+}
