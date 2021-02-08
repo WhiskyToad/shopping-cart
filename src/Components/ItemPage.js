@@ -3,9 +3,12 @@ import Header from './Header'
 import './CSS/ItemPage.css';
 import Data from './Data'
 import backImg from '../Images/back.png'
+import {useDispatch} from 'react-redux'
+import {addToBasket} from '../Actions'
 
 const ItemPage = () => {
-    const item = Data[window.location.hash.substr(1)]
+    const item = Data[window.location.hash.substr(1)];
+    const dispatch = useDispatch();
     
     return (
         <div>
@@ -18,7 +21,7 @@ const ItemPage = () => {
                 <h1>{item.name}</h1>
                 <h2>{item.description}</h2>
                 <div id = 'buy-row'>
-                    <button>Add to Cart</button>
+                    <button onClick= {() => dispatch(addToBasket(item))}>Add to Cart</button>
                     <h2>{item.price}</h2>
                 </div>
             </div>

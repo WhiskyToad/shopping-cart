@@ -14,16 +14,9 @@ import Top from '../Images/top.png';
 import Glasses from '../Images/glasses.png'
 import Data from './Data'
 
-/* Need to set filter if i click on dog/cat on top menu 
-  need to make a filters module to export
-  can I change classname on hover?
-  img size changing on filter change
-*/
-
 const Shop = (props) => {
   const mainFilter = useSelector(state => state.mainFilter);
   const subFilter = useSelector(state => state.subFilter);
-  const dispatch = useDispatch();
 
     let Catalogue = Data.map((item, id) => {
       let display ='display-card'
@@ -43,13 +36,10 @@ const Shop = (props) => {
         <h2>{item.name}</h2>
         <h2 className = 'price'>£{item.price}</h2>
       </div>
-      <button onClick = {() => changeBasket(item)}>Buy Now</button>
+      <button onClick = {() => dispatch(addToBasket(item))}>Buy Now</button>
     </div>
     });
 
-    function changeBasket(choice){
-      dispatch(addToBasket(choice))
-    }
     function changeFilter(choice){
       console.log(initialState)
       dispatch(changeMainFilters(choice))

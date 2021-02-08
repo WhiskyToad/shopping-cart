@@ -6,9 +6,6 @@ import './CSS/Header.css';
 import logo from '../Images/Lartsy-01.png';
 import Account from '../Images/account-icon.png';
 
-
-//need to sort out keys for removing
-
 const Header = (props) => {
   const basketItems = useSelector(state => state.basket.arr);
   
