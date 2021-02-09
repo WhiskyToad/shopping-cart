@@ -22,9 +22,10 @@ const Header = (props) => {
             <MemeGenerator />
             <img src = {Account} alt = 'account'></img>
             <div>
-            <span id = 'basket-size'>
-              <BasketPopup />
-              ({basketItems.length})</span>
+              <span id = 'basket-size'>
+                <BasketPopup />
+                ({basketItems.length})
+              </span>
             </div>
         </div>
       </ul>

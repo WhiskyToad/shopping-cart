@@ -37,6 +37,7 @@ const Shop = (props) => {
         <h2>{item.name}</h2>
         <h2 className = 'price'>£{item.price}</h2>
       </div>
+      <div></div>
       <button onClick = {() => dispatch(addToBasket(item))}>Buy Now</button>
     </div>
     });
