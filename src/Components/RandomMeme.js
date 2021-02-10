@@ -37,6 +37,9 @@ import {memeDisplay} from '../Actions';
             })
             .then(function(){
               setTimeout(dispatch(memeDisplay('DISPLAY-MEME')), 750)
+            })
+            .catch(function(err) {
+              console.log(err)
             });
         }
     }
