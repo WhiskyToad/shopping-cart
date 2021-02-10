@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import {useSelector, useDispatch} from 'react-redux'
+import { HashLink as Link } from 'react-router-hash-link';
 import {addToBasket, changeMainFilters} from '../Actions'
-import {initialState} from '../Reducers/basket'
 import Header from './Header';
 import Footer from './Footer';
 import './CSS/Shop.css';
@@ -21,8 +21,7 @@ const Shop = (props) => {
 
     let Catalogue = Data.map((item, id) => {
       let display ='display-card'
-      let pageLink = '/item#' + id;
-      console.log(pageLink)
+      let pageLink = './item?' + id;
       if (mainFilter !== 'all'){
         if (mainFilter !== item.category){
           display = 'hidden';
@@ -32,7 +31,7 @@ const Shop = (props) => {
             display = 'hidden';
           }}
       return  <div className = {display} key = {id}>
-      <a href ={pageLink}><img src = {item.src} alt = {item.name}></img></a>
+      <Link to ={pageLink}><img src = {item.src} alt = {item.name}></img></Link>
       <div className = 'name-row'>
         <h2>{item.name}</h2>
         <h2 className = 'price'>£{item.price}</h2>
@@ -43,14 +42,8 @@ const Shop = (props) => {
     });
 
     function changeFilter(choice){
-      console.log(initialState)
       dispatch(changeMainFilters(choice))
       return Catalogue;
-    }
-
-    if (window.location.hash){
-      changeFilter(window.location.hash.substr(1))
-      window.history.replaceState(null, null, ' ');
     }
 
   return (

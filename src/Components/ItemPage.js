@@ -1,4 +1,5 @@
 import React from "react";
+import { HashLink as Link } from 'react-router-hash-link';
 import Header from './Header'
 import './CSS/ItemPage.css';
 import Data from './Data'
@@ -7,14 +8,14 @@ import {useDispatch} from 'react-redux'
 import {addToBasket} from '../Actions'
 
 const ItemPage = () => {
-    const item = Data[window.location.hash.substr(1)];
+    const item = Data[window.location.hash.slice(window.location.hash.indexOf('?')+ 1, window.location.hash.length)]
     const dispatch = useDispatch();
     
     return (
         <div>
             <Header />
          <div id = 'top-background-item'></div>
-         <a href = './shop'><button id ='back-button'><img src = {backImg} alt ='go back'></img><span>Back</span></button></a>
+         <Link to = './shop'><button id ='back-button'><img src = {backImg} alt ='go back'></img><span>Back</span></button></Link>
         <div id = 'item-display-container'>
             <img src = {item.src} alt = {item.name}></img>
             <div id = 'info-text'>

@@ -1,5 +1,7 @@
 import React from "react";
-import {useSelector} from 'react-redux'
+import { HashLink as Link } from 'react-router-hash-link';
+import {useSelector, useDispatch} from 'react-redux'
+import {changeMainFilters} from '../Actions'
 import BasketPopup from './BasketDisplay'
 import MemeGenerator from './RandomMeme'
 import './CSS/Header.css';
@@ -8,15 +10,16 @@ import Account from '../Images/account-icon.png';
 
 const Header = (props) => {
   const basketItems = useSelector(state => state.basket.arr);
+  const dispatch = useDispatch();
   
       return (
       <div>
       <ul id = 'navbar'>
           <div className = 'navbar-segment-left'>
-          <a href = '../'><img id = 'logo' src = {logo} alt = 'Lartsy logo'></img></a>
-          <a href = './shop#cat'><li>Cats</li></a>
-            <a href = './shop#dog'><li>Dogs</li></a>
-            <a href = './shop#all'><li>Shop</li></a>
+          <Link to = '../'><img id = 'logo' src = {logo} alt = 'Lartsy logo'></img></Link>
+          <Link to = './shop' onClick = {() => dispatch(changeMainFilters('cat'))}><li>Cats</li></Link>
+            <Link to = './shop' onClick = {() => dispatch(changeMainFilters('dog'))}><li>Dogs</li></Link>
+            <Link to = './shop' onClick = {() => dispatch(changeMainFilters('all'))}><li>Shop</li></Link>
         </div>
         <div className = 'navbar-segment-right'>
             <MemeGenerator />
