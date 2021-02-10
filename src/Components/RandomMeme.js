@@ -14,6 +14,8 @@ import {memeDisplay} from '../Actions';
         src: 'null'
       })
       
+      /* Selects a random meme from the list and retrieves it from giphy, it has a delay to showing the meme
+      to try and make it smoother */
     function getMeme(key) {
         if (key === 'Enter' || key.key === 'Enter'){
             const list = ['Dragon', 'PokeMon', 'Cat', 'Dog', 'pizza', 'Programmer', 'Coder',
@@ -23,6 +25,10 @@ import {memeDisplay} from '../Actions';
             .then(function(response) {
             return response.json();
             })
+            .then(function(response){
+              dispatch(memeDisplay('HIDE-MEME'))
+              return response;
+            })
             .then(function(response) {
             setMeme({
                 item: item,
@@ -30,7 +36,7 @@ import {memeDisplay} from '../Actions';
             })
             })
             .then(function(){
-              dispatch(memeDisplay('DISPLAY-MEME'))
+              setTimeout(dispatch(memeDisplay('DISPLAY-MEME')), 750)
             });
         }
     }

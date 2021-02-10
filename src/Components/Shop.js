@@ -19,6 +19,7 @@ const Shop = (props) => {
   const subFilter = useSelector(state => state.subFilter);
   const dispatch = useDispatch();
 
+  /*Map through the data of items and create each ones, checking if any filters apply to it and setting display accordingly */
     let Catalogue = Data.map((item, id) => {
       let display ='display-card'
       let pageLink = './item?' + id;
@@ -41,11 +42,6 @@ const Shop = (props) => {
     </div>
     });
 
-    function changeFilter(choice){
-      dispatch(changeMainFilters(choice))
-      return Catalogue;
-    }
-
   return (
     <div>
       <Header />
@@ -53,19 +49,19 @@ const Shop = (props) => {
         <div id = 'shop-sidebar'>
         <div className = 'filters-container'>
             <h1>Category:</h1>
-              <div className = 'filter-line' onClick = { () => changeFilter('all')}>
+              <div className = 'filter-line' onClick = { () => dispatch(changeMainFilters('all'))}>
               <div className = 'filter-img'>
                 <img src = {Checked} className = {mainFilter === 'all' ? null : 'hidden'}></img>
                 </div>
                 <h3>All</h3>
               </div>
-              <div className = 'filter-line' onClick = {() => changeFilter('cat')}>
+              <div className = 'filter-line' onClick = {() => dispatch(changeMainFilters('cat'))}>
               <div className = 'filter-img'>
                 <img src = {Cat} className = {mainFilter === 'cat' ? null : 'hidden'}></img>
                 </div>
                 <h3>Cat</h3>
               </div>
-              <div className = 'filter-line' onClick = {() => changeFilter('dog')}>
+              <div className = 'filter-line' onClick = {() => dispatch(changeMainFilters('dog'))}>
               <div className = 'filter-img'>
                 <img src = {Dog} className = {mainFilter === 'dog' ? null : 'hidden'}></img>
                 </div>
@@ -74,25 +70,25 @@ const Shop = (props) => {
             </div>
             <div className = 'filters-container'>
             <h1>Sub-Category:</h1>
-            <div className = 'filter-line' onClick = { () => changeFilter('allSub')}>
+            <div className = 'filter-line' onClick = { () => dispatch(changeMainFilters('allSub'))}>
               <div className = 'filter-img'>
                 <img src = {Checked} className = {subFilter === 'allSub' ? null : 'hidden'}></img>
                 </div>
                 <h3>All</h3>
               </div>
-              <div className = 'filter-line' onClick = { () => changeFilter('hat')}>
+              <div className = 'filter-line' onClick = { () => dispatch(changeMainFilters('hat'))}>
               <div className = 'filter-img'>
                 <img src = {Hat} className = {subFilter === 'hat' ? null : 'hidden'}></img>
                 </div>
                 <h3>Hats</h3>
               </div>
-              <div className = 'filter-line' onClick = { () => changeFilter('top')}>
+              <div className = 'filter-line' onClick = { () => dispatch(changeMainFilters('top'))}>
               <div className = 'filter-img'>
                 <img src = {Top} className = {subFilter === 'top' ? null : 'hidden'}></img>
                 </div>
                 <h3>Tops</h3>
               </div>
-              <div className = 'filter-line' onClick = { () => changeFilter('glasses')}>
+              <div className = 'filter-line' onClick = { () => dispatch(changeMainFilters('glasses'))}>
               <div className = 'filter-img'>
                 <img src = {Glasses} className = {subFilter === 'glasses' ? null : 'hidden'}></img>
                 </div>

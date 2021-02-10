@@ -15,10 +15,6 @@ import DogTop3 from '../Images/dogtop3.png';
 import DogGlasses from '../Images/dog-glasses.png';
 import DogGlasses2 from '../Images/dog-glasses2.png';
 
-/* can you make it scaleable better by different arrays for each category, 
-less writing 'cat' 'hat' every time
-is that what a backend is for? */
-
 const Data = [
     {
         category: 'cat',

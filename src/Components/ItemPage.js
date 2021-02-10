@@ -8,6 +8,7 @@ import {useDispatch} from 'react-redux'
 import {addToBasket} from '../Actions'
 
 const ItemPage = () => {
+    /*Searches the URL and returns the value after the ? which is the location of the item in Data */
     const item = Data[window.location.hash.slice(window.location.hash.indexOf('?')+ 1, window.location.hash.length)]
     const dispatch = useDispatch();
     

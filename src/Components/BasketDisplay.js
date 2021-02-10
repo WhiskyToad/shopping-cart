@@ -10,12 +10,10 @@ const BasketPopup = () => {
   const memeValue = useSelector(state => state.memeDisplay);
   const basketItems = useSelector(state => state.basket.arr);
   let total = 0
-    const [open, setOpen] = useState(false);
-    const closeModal = () => setOpen(false);
-    function changeBasket(choice){
-      dispatch(removeBasket(choice))
-    }
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
     
+  /*Maps the individual items in the basket and displays them */
     let basketCreator = basketItems.map((item, id) => {
         total += item.price;
         return <div className = 'basket-item' key = {id}>
@@ -25,7 +23,7 @@ const BasketPopup = () => {
             <div className ='basket-column'>
             <h2>{item.name}</h2>
             <p>{item.description}</p>
-            <button className = 'basket-button' onClick ={() => changeBasket(id)}>Remove</button>
+            <button className = 'basket-button' onClick ={() => dispatch(removeBasket(id))}>Remove</button>
           </div>
           <div className ='basket-column'>
             <h2>Price</h2>
@@ -34,6 +32,7 @@ const BasketPopup = () => {
           </div>
     });
 
+    /*closes the meme if its open and then open the basket */
     function openBasket(){
       if (memeValue){
         dispatch(memeDisplay('HIDE-MEME'))
